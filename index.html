@@ -3,9 +3,464 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Beautya - Skincare & Cosmetic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 80px;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #d4a574;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d4a574;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-icons button {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        .nav-icons button:hover {
+            color: #d4a574;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 90vh;
+            align-items: center;
+            padding: 60px 80px;
+            background: linear-gradient(135deg, #fdf8f4 0%, #fef9f6 100%);
+        }
+
+        .hero-content h1 {
+            font-size: 64px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #2c2c2c;
+        }
+
+        .hero-content h1 span {
+            color: #d4a574;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-primary {
+            padding: 16px 40px;
+            background: #d4a574;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #c49563;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 165, 116, 0.3);
+        }
+
+        .btn-secondary {
+            padding: 16px 40px;
+            background: transparent;
+            color: #333;
+            border: 2px solid #d4a574;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #d4a574;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .product-showcase {
+            width: 400px;
+            height: 500px;
+            background: linear-gradient(135deg, #f5e8dc 0%, #e8d5c4 100%);
+            border-radius: 200px 200px 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .product-bottle {
+            width: 120px;
+            height: 350px;
+            background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
+            border-radius: 60px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .bottle-cap {
+            width: 80px;
+            height: 40px;
+            background: #d4a574;
+            border-radius: 40px 40px 0 0;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 80px;
+            background: #fff;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .features-header h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            color: #2c2c2c;
+        }
+
+        .features-header p {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .feature-card {
+            padding: 40px;
+            background: #fdf8f4;
+            border-radius: 20px;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: #d4a574;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 36px;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #2c2c2c;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 100px 80px;
+            background: linear-gradient(135deg, #fdf8f4 0%, #fef9f6 100%);
+        }
+
+        .products-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .products-header h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            color: #2c2c2c;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #f5e8dc 0%, #e8d5c4 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-category {
+            font-size: 12px;
+            color: #d4a574;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c2c2c;
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #d4a574;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav, .hero, .features, .products {
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-image {
+                margin-top: 40px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 42px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>warda</h1>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Beautya</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#shop">Shop</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-icons">
+            <button>🔍</button>
+            <button>🛒</button>
+            <button>👤</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Natural Beauty<br>Starts With<br><span>Healthy Skin</span></h1>
+            <p>Discover our premium collection of natural skincare products designed to enhance your natural beauty and give you radiant, healthy skin.</p>
+            <div class="cta-buttons">
+                <button class="btn-primary">Shop Now</button>
+                <button class="btn-secondary">Learn More</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="product-showcase">
+                <div class="product-bottle">
+                    <div class="bottle-cap"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-header">
+            <h2>Why Choose Beautya</h2>
+            <p>We provide the best natural skincare solutions for your beauty needs</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🌿</div>
+                <h3>100% Natural</h3>
+                <p>All our products are made from natural ingredients, free from harmful chemicals and toxins.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3>Dermatologist Tested</h3>
+                <p>Every product is tested and approved by certified dermatologists for safety and effectiveness.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🐰</div>
+                <h3>Cruelty Free</h3>
+                <p>We never test on animals. Our products are 100% cruelty-free and ethically made.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="shop">
+        <div class="products-header">
+            <h2>Featured Products</h2>
+        </div>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">🧴</div>
+                <div class="product-info">
+                    <div class="product-category">Moisturizer</div>
+                    <div class="product-name">Hydrating Face Cream</div>
+                    <div class="product-price">$45.00</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">💧</div>
+                <div class="product-info">
+                    <div class="product-category">Serum</div>
+                    <div class="product-name">Vitamin C Serum</div>
+                    <div class="product-price">$38.00</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🧼</div>
+                <div class="product-info">
+                    <div class="product-category">Cleanser</div>
+                    <div class="product-name">Gentle Face Wash</div>
+                    <div class="product-price">$28.00</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">🌙</div>
+                <div class="product-info">
+                    <div class="product-category">Night Cream</div>
+                    <div class="product-name">Overnight Repair Cream</div>
+                    <div class="product-price">$52.00</div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
